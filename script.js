@@ -188,46 +188,6 @@ if (totalPhonesCount) {
   totalPhonesCount.textContent = `+${phones.length}`;
 }
 
-function getEffectiveTheme() {
-  try {
-    const saved = localStorage.getItem("alfalastini_theme");
-    if (saved === "dark" || saved === "light") return saved;
-  } catch {}
-  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}
-
-function applyTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
-  const iconEl = document.getElementById("themeIcon");
-  const labelEl = document.getElementById("themeLabel");
-
-  if (theme === "dark") {
-    if (iconEl) iconEl.textContent = "☀️";
-    if (labelEl) labelEl.textContent = "فاتح";
-  } else {
-    if (iconEl) iconEl.textContent = "🌙";
-    if (labelEl) labelEl.textContent = "داكن";
-  }
-}
-
-function initThemeToggle() {
-  let currentTheme = getEffectiveTheme();
-  applyTheme(currentTheme);
-
-  const btn = document.getElementById("themeToggleBtn");
-  if (btn) {
-    btn.addEventListener("click", () => {
-      currentTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      applyTheme(currentTheme);
-      try {
-        localStorage.setItem("alfalastini_theme", currentTheme);
-      } catch {}
-    });
-  }
-}
-
 function initScrollTopButton() {
   const scrollTopBtn = document.getElementById("scrollTopBtn");
   if (!scrollTopBtn) return;
@@ -668,7 +628,6 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-initThemeToggle();
 initScrollTopButton();
 initWelcomeModal();
 setupWhatsAppShareButtons();

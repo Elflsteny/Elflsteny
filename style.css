@@ -1,11 +1,11 @@
 :root {
-  --bg: #ffffff;
-  --surface: rgba(255, 255, 255, 0.96);
+  --bg: #eef2f9;
+  --surface: rgba(255, 255, 255, 0.94);
   --surface-solid: #ffffff;
-  --surface-alt: #f1f5f9;
+  --surface-alt: #e7ecf5;
   --text: #0f172a;
   --text-muted: #475569;
-  --border: rgba(15, 23, 42, 0.10);
+  --border: rgba(15, 23, 42, 0.09);
   --brand-green: #007A3D;
   --brand-green-hover: #006130;
   --brand-red: #CE1126;
@@ -20,27 +20,8 @@
   --radius: 16px;
 }
 
-:root[data-theme="dark"] {
-  --bg: #060911;
-  --surface: rgba(17, 23, 36, 0.94);
-  --surface-solid: #111724;
-  --surface-alt: #182134;
-  --text: #f8fafc;
-  --text-muted: #94a3b8;
-  --border: rgba(255, 255, 255, 0.08);
-  --brand-green: #10b981;
-  --brand-green-hover: #059669;
-  --brand-red: #f43f5e;
-  --brand-gold: #fbbf24;
-  --badge-new-bg: rgba(16, 185, 129, 0.15);
-  --badge-new-text: #34d399;
-  --badge-used-bg: rgba(244, 63, 94, 0.15);
-  --badge-used-text: #fb7185;
-  --shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.55);
-}
-
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root {
     --bg: #060911;
     --surface: rgba(17, 23, 36, 0.94);
     --surface-solid: #111724;
@@ -76,7 +57,6 @@ body {
   color: var(--text);
   line-height: 1.65;
   overflow-x: hidden;
-  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .welcome-backdrop {
@@ -455,32 +435,6 @@ header {
 
 .nav-links a:hover::after {
   transform: scaleX(1);
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.theme-toggle-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface-alt);
-  color: var(--text);
-  font-size: 0.8rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: border-color 0.18s ease, transform 0.18s ease, background-color 0.18s ease;
-}
-
-.theme-toggle-btn:hover {
-  border-color: var(--brand-green);
-  transform: translateY(-1px);
 }
 
 .status-pill {
@@ -925,12 +879,8 @@ header {
   overflow: hidden;
 }
 
-:root[data-theme="dark"] .phone-visual {
-  background: radial-gradient(circle at 50% 45%, #232d45 0%, #111623 100%);
-}
-
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .phone-visual {
+  .phone-visual {
     background: radial-gradient(circle at 50% 45%, #232d45 0%, #111623 100%);
   }
 }
@@ -1504,14 +1454,6 @@ footer {
   }
   .nav-links {
     display: none;
-  }
-  .theme-toggle-btn {
-    padding: 6px 9px;
-    font-size: 0.76rem;
-  }
-  .status-pill {
-    padding: 6px 10px;
-    font-size: 0.74rem;
   }
   .form-grid {
     grid-template-columns: 1fr;
