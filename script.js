@@ -188,6 +188,55 @@ if (totalPhonesCount) {
   totalPhonesCount.textContent = `+${phones.length}`;
 }
 
+function getEffectiveTheme() {
+  try {
+    const saved = localStorage.getItem("alfalastini_theme");
+    if (saved === "dark" || saved === "light") return saved;
+  } catch {}
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  const iconEl = document.getElementById("themeIcon");
+  const labelEl = document.getElementById("themeLabel");
+
+  if (theme === "dark") {
+    if (iconEl) iconEl.textContent = "☀️";
+    if (labelEl) labelEl.textContent = "فاتح";
+  } else {
+    if (iconEl) iconEl.textContent = "🌙";
+    if (labelEl) labelEl.textContent = "داكن";
+  }
+}
+
+function initThemeToggle() {
+  let currentTheme = getEffectiveTheme();
+  applyTheme(currentTheme);
+
+  const btn = document.getElementById("themeToggleBtn");
+  if (btn) {
+    btn.addEventListener("click", () => {
+      currentTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(currentTheme);
+      try {
+        localStorage.setItem("alfalastini_theme", currentTheme);
+      } catch {}
+    });
+  }
+}
+
+function initScrollTopButton() {
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+  if (!scrollTopBtn) return;
+
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
 function initWelcomeModal() {
   const modal = document.getElementById("welcomeModal");
   const closeBtn = document.getElementById("closeWelcomeBtn");
@@ -586,14 +635,23 @@ function updateStoreStatus() {
 }
 
 const scrollProgress = document.getElementById("scrollProgress");
+const scrollTopBtn = document.getElementById("scrollTopBtn");
 let scrollTicking = false;
+
 window.addEventListener("scroll", () => {
-  if (!scrollProgress || scrollTicking) return;
+  if (scrollTicking) return;
   window.requestAnimationFrame(() => {
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const ratio = docHeight > 0 ? scrollTop / docHeight : 0;
-    scrollProgress.style.transform = `scaleX(${ratio})`;
+
+    if (scrollProgress) {
+      scrollProgress.style.transform = `scaleX(${ratio})`;
+    }
+    if (scrollTopBtn) {
+      scrollTopBtn.classList.toggle("show", scrollTop > 400);
+    }
+
     scrollTicking = false;
   });
   scrollTicking = true;
@@ -610,6 +668,8 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
+initThemeToggle();
+initScrollTopButton();
 initWelcomeModal();
 setupWhatsAppShareButtons();
 updateStoreStatus();
