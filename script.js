@@ -188,7 +188,38 @@ if (totalPhonesCount) {
   totalPhonesCount.textContent = `+${phones.length}`;
 }
 
-// تفعيل أزرار مشاركة الموقع السريع على واتساب
+function initWelcomeModal() {
+  const modal = document.getElementById("welcomeModal");
+  const closeBtn = document.getElementById("closeWelcomeBtn");
+  const dismissBtn = document.getElementById("welcomeDismissBtn");
+  const catalogBtn = document.getElementById("welcomeCatalogBtn");
+
+  if (!modal) return;
+
+  try {
+    if (!sessionStorage.getItem("alfalastini_welcomed")) {
+      modal.hidden = false;
+    }
+  } catch {
+    modal.hidden = false;
+  }
+
+  const hideModal = () => {
+    modal.hidden = true;
+    try {
+      sessionStorage.setItem("alfalastini_welcomed", "1");
+    } catch {}
+  };
+
+  if (closeBtn) closeBtn.addEventListener("click", hideModal);
+  if (dismissBtn) dismissBtn.addEventListener("click", hideModal);
+  if (catalogBtn) catalogBtn.addEventListener("click", hideModal);
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) hideModal();
+  });
+}
+
 function setupWhatsAppShareButtons() {
   const pageUrl = window.location.href;
   const shareText = `🍎 الفلسطيني Store (ملك التفاح) - فرع المرج القديمة\nتصفح أسعار الآيفون والموبايلات كاش، قارن بين الأجهزة، أو بدّل موبايلك القديم:\n${pageUrl}`;
@@ -579,6 +610,7 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
+initWelcomeModal();
 setupWhatsAppShareButtons();
 updateStoreStatus();
 renderPhones();
