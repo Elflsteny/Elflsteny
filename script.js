@@ -7,7 +7,7 @@ const phones = [
     id: 1,
     name: "iPhone 16 Pro Max",
     brand: "Apple",
-    image: "images/iphone-16-pro-max.jpg",
+    image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16-pro-max.jpg",
     condition: "new",
     conditionLabel: "جديد - ضمان دولي",
     storage: "256GB / 8GB RAM",
@@ -21,7 +21,7 @@ const phones = [
     id: 2,
     name: "iPhone 15 Pro",
     brand: "Apple",
-    image: "images/iphone-15-pro.jpg",
+    image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-15-pro.jpg",
     condition: "used",
     conditionLabel: "كسر زيرو - بطارية 94%",
     storage: "256GB / 8GB RAM",
@@ -35,7 +35,7 @@ const phones = [
     id: 3,
     name: "iPhone 13",
     brand: "Apple",
-    image: "images/iphone-13.jpg",
+    image: "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13.jpg",
     condition: "used",
     conditionLabel: "كسر زيرو - بطارية 90%",
     storage: "128GB / 4GB RAM",
@@ -49,7 +49,7 @@ const phones = [
     id: 4,
     name: "Samsung Galaxy S24 Ultra",
     brand: "Samsung",
-    image: "images/galaxy-s24-ultra.jpg",
+    image: "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s24-ultra-5g-sm-s928-stylus.jpg",
     condition: "new",
     conditionLabel: "جديد - ضمان محلي",
     storage: "256GB / 12GB RAM",
@@ -63,7 +63,7 @@ const phones = [
     id: 5,
     name: "Samsung Galaxy A55 5G",
     brand: "Samsung",
-    image: "images/galaxy-a55.jpg",
+    image: "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-a55.jpg",
     condition: "new",
     conditionLabel: "جديد - ضمان محلي",
     storage: "256GB / 8GB RAM",
@@ -77,7 +77,7 @@ const phones = [
     id: 6,
     name: "Samsung S23 Ultra",
     brand: "Samsung",
-    image: "images/galaxy-s23-ultra.jpg",
+    image: "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s23-ultra-5g.jpg",
     condition: "used",
     conditionLabel: "كسر زيرو بحالة المصنع",
     storage: "256GB / 12GB RAM",
@@ -91,7 +91,7 @@ const phones = [
     id: 7,
     name: "Redmi Note 13 Pro 5G",
     brand: "Xiaomi",
-    image: "images/redmi-note-13-pro.jpg",
+    image: "https://fdn2.gsmarena.com/vv/bigpic/xiaomi-redmi-note-13-pro-5g.jpg",
     condition: "new",
     conditionLabel: "جديد - ضمان محلي",
     storage: "256GB / 8GB RAM",
@@ -105,7 +105,7 @@ const phones = [
     id: 8,
     name: "Xiaomi 13T",
     brand: "Xiaomi",
-    image: "images/xiaomi-13t.jpg",
+    image: "https://fdn2.gsmarena.com/vv/bigpic/xiaomi-13t.jpg",
     condition: "new",
     conditionLabel: "جديد - ضمان محلي",
     storage: "256GB / 12GB RAM",
@@ -119,7 +119,7 @@ const phones = [
     id: 9,
     name: "Realme 12 Pro+ 5G",
     brand: "Realme",
-    image: "images/realme-12-pro-plus.jpg",
+    image: "https://fdn2.gsmarena.com/vv/bigpic/realme-12-pro-plus.jpg",
     condition: "new",
     conditionLabel: "جديد - ضمان محلي",
     storage: "512GB / 12GB RAM",
@@ -133,7 +133,7 @@ const phones = [
     id: 10,
     name: "Realme C67",
     brand: "Realme",
-    image: "images/realme-c67.jpg",
+    image: "https://fdn2.gsmarena.com/vv/bigpic/realme-c67-4g.jpg",
     condition: "new",
     conditionLabel: "جديد - ضمان محلي",
     storage: "256GB / 8GB RAM",
@@ -147,7 +147,7 @@ const phones = [
     id: 11,
     name: "Oppo Reno 11 5G",
     brand: "Oppo",
-    image: "images/oppo-reno-11.jpg",
+    image: "https://fdn2.gsmarena.com/vv/bigpic/oppo-reno11-international.jpg",
     condition: "used",
     conditionLabel: "كسر زيرو - استعمال خفيف",
     storage: "256GB / 12GB RAM",
@@ -161,7 +161,7 @@ const phones = [
     id: 12,
     name: "Oppo A98 5G",
     brand: "Oppo",
-    image: "images/oppo-a98.jpg",
+    image: "https://fdn2.gsmarena.com/vv/bigpic/oppo-a98-5g.jpg",
     condition: "new",
     conditionLabel: "جديد - ضمان محلي",
     storage: "256GB / 8GB RAM",
@@ -188,52 +188,7 @@ if (totalPhonesCount) {
   totalPhonesCount.textContent = `+${phones.length}`;
 }
 
-function handleImgFallback(imgEl) {
-  if (!imgEl || imgEl.dataset.fallbackDone) return;
-  imgEl.dataset.fallbackDone = "1";
-  imgEl.style.display = "none";
-  if (imgEl.nextElementSibling) {
-    imgEl.nextElementSibling.style.display = "flex";
-  }
-}
-
-function handleThumbFallback(imgEl) {
-  if (!imgEl) return;
-  imgEl.style.display = "none";
-}
-
-function initWelcomeModal() {
-  const modal = document.getElementById("welcomeModal");
-  const closeBtn = document.getElementById("closeWelcomeBtn");
-  const dismissBtn = document.getElementById("welcomeDismissBtn");
-  const catalogBtn = document.getElementById("welcomeCatalogBtn");
-
-  if (!modal) return;
-
-  try {
-    if (!sessionStorage.getItem("alfalastini_welcomed")) {
-      modal.hidden = false;
-    }
-  } catch {
-    modal.hidden = false;
-  }
-
-  const hideModal = () => {
-    modal.hidden = true;
-    try {
-      sessionStorage.setItem("alfalastini_welcomed", "1");
-    } catch {}
-  };
-
-  if (closeBtn) closeBtn.addEventListener("click", hideModal);
-  if (dismissBtn) dismissBtn.addEventListener("click", hideModal);
-  if (catalogBtn) catalogBtn.addEventListener("click", hideModal);
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) hideModal();
-  });
-}
-
+// تفعيل أزرار مشاركة الموقع السريع على واتساب
 function setupWhatsAppShareButtons() {
   const pageUrl = window.location.href;
   const shareText = `🍎 الفلسطيني Store (ملك التفاح) - فرع المرج القديمة\nتصفح أسعار الآيفون والموبايلات كاش، قارن بين الأجهزة، أو بدّل موبايلك القديم:\n${pageUrl}`;
@@ -296,7 +251,7 @@ function renderPhones() {
               alt="${phone.name}"
               class="phone-img"
               loading="lazy"
-              onerror="handleImgFallback(this)"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
             />
             <div class="phone-fallback">
               <div class="phone-icon">${isApple ? APPLE_SVG : "📱"}</div>
@@ -381,8 +336,8 @@ function renderCompare() {
       <thead>
         <tr>
           <th>المواصفات</th>
-          <th><img src="${p1.image}" alt="${p1.name}" class="compare-thumb" onerror="handleThumbFallback(this)" />${p1.name}</th>
-          <th>${p2 ? `<img src="${p2.image}" alt="${p2.name}" class="compare-thumb" onerror="handleThumbFallback(this)" />${p2.name}` : "اختر جهاز ثاني للمقارنة"}</th>
+          <th><img src="${p1.image}" alt="${p1.name}" class="compare-thumb" />${p1.name}</th>
+          <th>${p2 ? `<img src="${p2.image}" alt="${p2.name}" class="compare-thumb" />${p2.name}` : "اختر جهاز ثاني للمقارنة"}</th>
         </tr>
       </thead>
       <tbody>
@@ -624,7 +579,6 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-initWelcomeModal();
 setupWhatsAppShareButtons();
 updateStoreStatus();
 renderPhones();
