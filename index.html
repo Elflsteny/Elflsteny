@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الفلسطيني Store | ملك التفاح - بيع وشراء واستبدال الهواتف كاش</title>
+  <meta name="description" content="الفلسطيني Store (ملك التفاح) - متخصصون في بيع وشراء واستبدال هواتف الآيفون والأندرويد الجديدة وكسر الزيرو كاش في فرع المرج القديمة." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="🍎 الفلسطيني Store | ملك التفاح - بيع وشراء الهواتف كاش" />
+  <meta property="og:description" content="أقوى عروض الكاش على هواتف الآيفون والأندرويد الجديدة وكسر الزيرو المضمونة. تصفح الأسعار وقارن الموديلات أو بدّل جهازك الآن في فرع المرج القديمة." />
+  <meta property="og:image" content="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-16-pro-max.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Crect width='384' height='512' rx='90' fill='%23111827'/%3E%3Cpath fill='%23ffffff' transform='translate(57, 64) scale(0.7)' d='M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- رسالة ترحيب للزبون عند دخول الموقع -->
+  <div class="welcome-backdrop" id="welcomeModal" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" hidden>
+    <div class="welcome-card">
+      <button type="button" class="welcome-close" id="closeWelcomeBtn" aria-label="إغلاق رسالة الترحيب">✕</button>
+      <div class="welcome-badge">🍎 الفلسطيني Store • ملك التفاح</div>
+      <h2 id="welcomeTitle">أهلاً بك في فرع المرج القديمة</h2>
+      <p>
+        متخصصون في بيع وشراء واستبدال هواتف <strong>iPhone</strong> وأحدث أجهزة الأندرويد الجديدة وكسر الزيرو المضمونة.
+      </p>
+      <div class="welcome-highlights">
+        <span>💵 تعامل كاش بأفضل سعر</span>
+        <span>🔄 استبدال وبيع فوري</span>
+        <span>🕒 1:00 ظهراً – 12:00 ص</span>
+      </div>
+      <div class="welcome-actions">
+        <a href="#catalog" class="btn btn-primary" id="welcomeCatalogBtn">تصفح الأجهزة المتاحة</a>
+        <button type="button" class="btn btn-outline" id="welcomeDismissBtn">دخول للموقع</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="bg-mesh"></div>
+    <div class="bg-dots"></div>
+    <span class="bg-orb orb-green"></span>
+    <span class="bg-orb orb-red"></span>
+    <span class="bg-orb orb-gold"></span>
+    <span class="bg-ring ring-1"></span>
+    <span class="bg-ring ring-2"></span>
+  </div>
+
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <div class="brand-logo" aria-label="Apple Logo">
+          <svg viewBox="0 0 384 512" width="22" height="22" fill="currentColor">
+            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+          </svg>
+        </div>
+        <div class="brand-text-wrap">
+          <div class="brand-title">
+            <span class="ar-name">الفلسطيني</span>
+            <span class="en-tag">STORE</span>
+          </div>
+          <span class="brand-slogan">👑 ملك التفاح</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#catalog">الأجهزة المتاحة</a>
+        <a href="#compare">المقارنة</a>
+        <a href="#trade-in">بيع أو استبدال</a>
+        <a href="#reviews">آراء العملاء</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <div class="status-pill">
+        <span class="dot" id="statusDot"></span>
+        <span id="statusText">جاري التحقق...</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero reveal">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <svg viewBox="0 0 384 512" width="14" height="14" fill="currentColor">
+          <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+        </svg>
+        <span>ملك التفاح • بيع وشراء واستبدال الهواتف كاش</span>
+      </div>
+      <h1>
+        أهلاً بك في <span class="hero-store-highlight">الفلسطيني Store</span><br>
+        <span class="king-apple-text">ملك التفاح</span> وأقوى عروض الكاش
+      </h1>
+      <p>
+        متخصصون في هواتف الآيفون وأحدث الموبايلات الجديدة وكسر الزيرو المضمونة. قارن المواصفات والأسعار، أو استبدل جهازك القديم بأحدث في فرع المرج القديمة.
+      </p>
+      <div class="hero-badges">
+        <span>🍎 متخصصون في أجهزة Apple</span>
+        <span>💵 تعامل كاش فقط</span>
+        <span>🔄 استبدال القديم بأحدث</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#catalog" class="btn btn-primary">تصفح الأجهزة المتاحة</a>
+        <a href="#trade-in" class="btn btn-outline">🔄 بدّل موبايلك القديم</a>
+        <a href="https://maps.google.com/?q=30.152811,31.342293" target="_blank" rel="noopener" class="btn btn-outline">📍 لوكيشن الفرع</a>
+        <a href="#" target="_blank" rel="noopener" class="btn btn-outline share-wa-btn">📤 مشاركة الموقع واتساب</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <strong id="totalPhonesCount">+12</strong>
+          <span>موديل متاح حالياً</span>
+        </div>
+        <div class="stat-item">
+          <strong>100%</strong>
+          <span>فحص وضمان قبل الاستلام</span>
+        </div>
+        <div class="stat-item">
+          <strong>كاش فوري</strong>
+          <span>شراء واستبدال المستعمل</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <h3>🛡️ مميزات الشراء من ملك التفاح</h3>
+      <ul>
+        <li>🍎 تشكيلة كاملة من أجهزة iPhone الجديدة وكسر الزيرو بأعلى نسب بطارية.</li>
+        <li>✅ جميع الأجهزة الجديدة بضمان الوكيل المعتمد.</li>
+        <li>✅ نشتري أو نستبدل جهازك المستعمل كاش بأعلى تقييم في السوق.</li>
+        <li>✅ نقل بياناتك بالكامل مجاناً داخل الفرع.</li>
+        <li>✅ مواعيد العمل يومياً من 1:00 ظهراً حتى 12:00 منتصف الليل.</li>
+      </ul>
+    </div>
+  </section>
+
+  <main class="container reveal" id="catalog">
+    <div class="section-header">
+      <h2>الأجهزة المتاحة في الفرع</h2>
+      <span class="section-sub" id="resultsCounter">عرض جميع الأجهزة</span>
+    </div>
+
+    <div class="controls">
+      <div class="search-sort-row">
+        <input type="text" id="searchInput" class="search-input" placeholder="ابحث باسم الموبايل (مثال: iPhone 16, 15 Pro, A55, Realme)..." />
+        <select id="sortSelect" class="sort-select" aria-label="ترتيب الأسعار">
+          <option value="default">ترتيب: الافتراضي</option>
+          <option value="price-asc">السعر: من الأرخص للأغلى</option>
+          <option value="price-desc">السعر: من الأغلى للأرخص</option>
+        </select>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="tab-btn active" data-filter="all">الكل</button>
+        <button class="tab-btn" data-filter="Apple">🍎 Apple</button>
+        <button class="tab-btn" data-filter="new">جديد</button>
+        <button class="tab-btn" data-filter="used">كسر زيرو</button>
+        <button class="tab-btn" data-filter="Samsung">Samsung</button>
+        <button class="tab-btn" data-filter="Xiaomi">Xiaomi</button>
+        <button class="tab-btn" data-filter="Realme">Realme</button>
+        <button class="tab-btn" data-filter="Oppo">Oppo</button>
+      </div>
+    </div>
+
+    <div class="grid" id="phonesGrid"></div>
+  </main>
+
+  <section class="container reveal" id="compare">
+    <div class="section-header">
+      <h2>مقارنة سريعة بين جهازين</h2>
+      <span class="section-sub">علّم على "قارن" في أي موبايلين من فوق لعرضهم وحساب فرق السعر</span>
+    </div>
+    <div class="compare-box" id="compareContainer">
+      <p class="empty-msg">لم يتم اختيار أجهزة للمقارنة بعد. اختر جهازين من القائمة بالأعلى.</p>
+    </div>
+  </section>
+
+  <section class="container reveal" id="trade-in">
+    <div class="sell-box">
+      <div>
+        <div class="mode-switch">
+          <button type="button" class="mode-btn active" data-mode="trade">🔄 استبدال بأحدث (Trade-in)</button>
+          <button type="button" class="mode-btn" data-mode="sell">💵 بيع كاش فوري</button>
+        </div>
+
+        <h2 class="sell-title" id="tradeTitle">بدّل موبايلك القديم بأحدث وادفع الفرق كاش</h2>
+        <p class="sell-desc" id="tradeDesc">
+          في <strong>الفلسطيني Store - ملك التفاح</strong> بنقيّم موبايلك القديم بأعلى سعر في السوق وتستلم جهازك الجديد أو كسر الزيرو فوراً بعد الفحص في فرع المرج القديمة.
+        </p>
+      </div>
+
+      <form class="form-grid" id="sellForm">
+        <input type="text" id="sellModel" placeholder="موبايلك الحالي (مثال: iPhone 13 Pro)" required />
+        <input type="text" id="sellStorage" placeholder="المساحة والرام (مثال: 256GB)" required />
+        <select id="sellBox" required>
+          <option value="بالعلبة والشاحن الأصلي">بالعلبة والشاحن الأصلي</option>
+          <option value="بالعلبة فقط">بالعلبة فقط</option>
+          <option value="جهاز فقط بدون علبة">جهاز فقط بدون علبة</option>
+        </select>
+        <input type="text" id="sellCondition" placeholder="الحالة / نسبة البطارية (مثال: 91% بدون خدوش)" required />
+        <input type="text" id="targetModel" class="full" placeholder="الموبايل اللي حابب تبدّل بيه (مثال: iPhone 15 Pro Max)" required />
+        <button type="submit" class="btn btn-whatsapp full" id="tradeSubmitBtn">💬 احسب فرق الاستبدال على واتساب</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="container reveal" id="reviews">
+    <div class="section-header">
+      <div>
+        <h2>تجارب وآراء عملائنا في الموقع</h2>
+        <span class="section-sub">تقييمات حقيقية من عملاء تعاملوا مع فرع المرج القديمة</span>
+      </div>
+      <div class="review-header-actions">
+        <button type="button" class="btn btn-primary btn-sm" id="toggleReviewFormBtn">
+          ✍️ أضف تقييمك في الموقع
+        </button>
+      </div>
+    </div>
+
+    <div class="add-review-box" id="addReviewBox" hidden>
+      <h3>✍️ أضف تقييمك الحقيقي بعد التعامل معنا</h3>
+      <p class="add-review-note">تقييمك يظهر لك في الموقع فوراً ويُرسل لواتساب الفرع لتوثيقه وعرضه رسمياً.</p>
+      <form class="form-grid" id="realReviewForm">
+        <input type="text" id="revName" placeholder="اسمك (مثال: محمود حسن)" required />
+        <input type="text" id="revDeal" placeholder="نوع التعامل (مثال: شراء iPhone 14 Pro)" required />
+        <select id="revStars" required>
+          <option value="5">⭐⭐⭐⭐⭐ (5/5 ممتاز)</option>
+          <option value="4">⭐⭐⭐⭐ (4/5 جيد جداً)</option>
+          <option value="3">⭐⭐⭐ (3/5 جيد)</option>
+        </select>
+        <input type="text" id="revDate" placeholder="تاريخ الزيارة (مثال: نوفمبر 2026)" required />
+        <textarea id="revComment" class="full" rows="3" placeholder="اكتب رأيك بكل صراحة في جودة الجهاز وتعامل الفرع..." required></textarea>
+        <button type="submit" class="btn btn-whatsapp full">✅ نشر التقييم وإرساله للتوثيق على واتساب</button>
+      </form>
+    </div>
+
+    <div class="reviews-grid" id="reviewsGrid"></div>
+  </section>
+
+  <section class="container reveal" id="faq">
+    <div class="section-header">
+      <h2>الأسئلة الشائعة</h2>
+      <span class="section-sub">إجابات سريعة لأهم استفساراتكم قبل زيارة الفرع</span>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>هل متاح تقسيط أم البيع كاش فقط؟</summary>
+        <p>جميع معاملات البيع والشراء والاستبدال في <strong>الفلسطيني Store</strong> تتم بنظام <strong>الكاش فقط</strong> لتقديم أقل سعر نهائي في السوق بدون أي فوائد أو مصاريف إضافية.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>هل يوجد شحن للمحافظات أم الاستلام داخل الفرع؟</summary>
+        <p>البيع والشراء والاستبدال يتم بالمعاينة والاستلام الفوري <strong>داخل فرع المرج القديمة فقط</strong> لضمان حق المشتري في فحص الجهاز وتجربته بالكامل بنفسه قبل الدفع.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>هل أجهزة الآيفون "كسر الزيرو" مفكوكة أو تم عمل صيانة لها؟</summary>
+        <p>نهائياً. جميع أجهزة كسر الزيرو لدينا بحالة المصنع الأصلية، غير مفكوكة، وتخضع لفحص شامل للبطارية والشاشة وجميع القطع قبل عرضها للبيع.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>ما المطلوب عند بيع أو استبدال موبايلي القديم في الفرع؟</summary>
+        <p>إحضار الجهاز والعلبة إن وجدت، وصورة البطاقة الشخصية لإثبات الملكية وضمان أمان التعامل للطرفين، ويتم التسعير والدفع أو الاستبدال كاش فوراً.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer id="location">
+    <div class="footer-grid">
+      <div>
+        <h4>🍎 الفلسطيني Store • ملك التفاح</h4>
+        <p>وجهتك الأولى لبيع وشراء واستبدال هواتف الآيفون والأجهزة الذكية الجديدة وكسر الزيرو كاش بأعلى مصداقية وأفضل سعر.</p>
+        <a href="#" target="_blank" rel="noopener" class="share-wa-btn">📤 شارك لينك الموقع على واتساب</a>
+      </div>
+      <div>
+        <h4>📍 العنوان ومواعيد العمل</h4>
+        <p>المرج القديمة - شارع القسم - عند المعرض</p>
+        <p>يومياً من 1:00 ظهراً حتى 12:00 منتصف الليل</p>
+        <a href="https://maps.google.com/?q=30.152811,31.342293" target="_blank" rel="noopener">افتح الموقع على خرائط جوجل ↗</a>
+      </div>
+      <div>
+        <h4>📞 تواصل مع الفرع</h4>
+        <a href="https://wa.me/201110933143" target="_blank" rel="noopener">واتساب المحل: 01110933143</a>
+        <a href="tel:01110933143">اتصال مباشر: 01110933143</a>
+        <p>البيع والشراء والاستلام داخل الفرع فقط</p>
+      </div>
+    </div>
+
+    <div class="dev-credit">
+      تصميم وتطوير: <a href="https://wa.me/201024811183" target="_blank" rel="noopener">Zeyad Mohammed</a>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/201110933143?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%20%D8%A7%D9%84%D9%81%D9%84%D8%B3%D8%B7%D9%8A%D9%86%D9%8A%20Store%20(%D9%85%D9%84%D9%83%20%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%AD)%D8%8C%20%D8%B9%D9%86%D8%AF%D9%8A%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5%20%D8%A7%D9%84%D8%A3%D8%AC%D9%87%D8%B2%D8%A9%20%D8%A7%D9%84%D9%85%D8%AA%D8%A7%D8%AD%D8%A9%20%D9%81%D9%8A%20%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D9%85%D8%B1%D8%AC%20%D8%A7%D9%84%D9%82%D8%AF%D9%8A%D9%85%D8%A9." target="_blank" rel="noopener" class="floating-wa" aria-label="تواصل واتساب">
+    <svg viewBox="0 0 448 512" width="24" height="24" fill="currentColor">
+      <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-16 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+    </svg>
+    <span>تواصل واتساب</span>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
