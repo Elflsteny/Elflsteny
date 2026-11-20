@@ -498,19 +498,8 @@ function escapeHTML(str) {
   }[m]));
 }
 
-function getStoredUserReviews() {
-  try {
-    return JSON.parse(localStorage.getItem("alfalastini_real_reviews") || "[]");
-  } catch {
-    return [];
-  }
-}
-
 function renderReviews() {
-  const userSubmitted = getStoredUserReviews();
-  const allReviews = [...userSubmitted, ...verifiedReviews];
-
-  if (!allReviews.length) {
+  if (!verifiedReviews.length) {
     reviewsGrid.innerHTML = `
       <div class="empty-reviews-box">
         <p style="font-weight: 800; font-size: 1rem; margin-bottom: 6px;">لا توجد تقييمات منشورة في الموقع بعد</p>
@@ -520,11 +509,9 @@ function renderReviews() {
     return;
   }
 
-  reviewsGrid.innerHTML = allReviews.map(rev => {
+  reviewsGrid.innerHTML = verifiedReviews.map(rev => {
     const starsStr = "⭐".repeat(Math.min(Math.max(Number(rev.stars) || 5, 1), 5));
-    const badgeHTML = rev.verified
-      ? `<span class="verified-badge">✔ تقييم موثق من الفرع</span>`
-      : `<span class="verified-badge">🕒 بانتظار توثيق الفرع</span>`;
+    const badgeHTML = `<span class="verified-badge">✔ تقييم موثق من الفرع</span>`;
 
     return `
       <div class="review-card">
@@ -554,27 +541,21 @@ if (toggleReviewFormBtn) {
 if (realReviewForm) {
   realReviewForm.addEventListener("submit", e => {
     e.preventDefault();
-    const newReview = {
-      name: document.getElementById("revName").value.trim(),
-      deal: document.getElementById("revDeal").value.trim(),
-      stars: Number(document.getElementById("revStars").value),
-      date: document.getElementById("revDate").value.trim(),
-      comment: document.getElementById("revComment").value.trim(),
-      verified: false
-    };
-
-    const existing = getStoredUserReviews();
-    existing.unshift(newReview);
-    localStorage.setItem("alfalastini_real_reviews", JSON.stringify(existing));
-
-    renderReviews();
-    realReviewForm.reset();
-    addReviewBox.hidden = true;
+    const name = document.getElementById("revName").value.trim();
+    const deal = document.getElementById("revDeal").value.trim();
+    const stars = Number(document.getElementById("revStars").value);
+    const date = document.getElementById("revDate").value.trim();
+    const comment = document.getElementById("revComment").value.trim();
 
     const waMsg = encodeURIComponent(
-      `تقييم عميل جديد لموقع الفلسطيني Store (ملك التفاح):\n- الاسم: ${newReview.name}\n- التعامل: ${newReview.deal}\n- التقييم: ${newReview.stars}/5 نجوم\n- التاريخ: ${newReview.date}\n- الرأي: ${newReview.comment}`
+      `طلب اعتماد تقييم جديد لموقع الفلسطيني Store (ملك التفاح):\n- الاسم: ${name}\n- التعامل: ${deal}\n- التقييم: ${stars}/5 نجوم\n- التاريخ: ${date}\n- الرأي: ${comment}\n\n[للموافقة على النشر، قم بإضافة هذه البيانات لمصفوفة verifiedReviews في الكود]`
     );
+
     window.open(`https://wa.me/${STORE_WHATSAPP}?text=${waMsg}`, "_blank");
+
+    alert("تم إرسال التقييم لإدارتك على واتساب للمراجعة والاعتماد.");
+    realReviewForm.reset();
+    if (addReviewBox) addReviewBox.hidden = true;
   });
 }
 
@@ -609,28 +590,4 @@ window.addEventListener("scroll", () => {
       scrollProgress.style.transform = `scaleX(${ratio})`;
     }
     if (scrollTopBtn) {
-      scrollTopBtn.classList.toggle("show", scrollTop > 400);
-    }
-
-    scrollTicking = false;
-  });
-  scrollTicking = true;
-}, { passive: true });
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.06 });
-
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-
-initScrollTopButton();
-initWelcomeModal();
-setupWhatsAppShareButtons();
-updateStoreStatus();
-renderPhones();
-renderReviews();
+      scrollTopBtn.classList
